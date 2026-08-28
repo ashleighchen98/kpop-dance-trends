@@ -272,11 +272,24 @@ function renderDashboard({ videos, sourceScrapedAt, processedAt }) {
       var btn = document.getElementById('refresh-btn');
       var status = document.getElementById('refresh-status');
 
+      var isLocalServer = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
       if (location.protocol === 'file:') {
         // No server behind this file — a static file can't run the scraper.
         btn.disabled = true;
         btn.textContent = '↻ Refresh (needs server)';
         status.textContent = 'Run "npm run serve" and open http://localhost:4173 to refresh from here.';
+        return;
+      }
+
+      if (!isLocalServer) {
+        // Publicly hosted (e.g. GitHub Pages) — there's no server here to hit
+        // either, just a static file GitHub serves. Unlike the file:// case,
+        // this looks like a real site, so pretending the button works and
+        // then failing on click would look broken rather than explained.
+        btn.disabled = true;
+        btn.textContent = '↻ Updates automatically';
+        status.textContent = 'This dashboard refreshes on its own every week — no action needed.';
         return;
       }
 
