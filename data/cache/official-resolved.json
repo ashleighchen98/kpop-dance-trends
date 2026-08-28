@@ -173,5 +173,18 @@
       "isOfficialChannel": false
     },
     "resolvedAt": "2026-08-28T14:05:39.703Z"
+  },
+  "7x hearts hearts2hearts iconic": {
+    "official": {
+      "videoId": "An0vA4ZLqkk",
+      "title": "Hearts2Hearts 하츠투하츠 'ICONIC HEART' Dance Practice",
+      "channelTitle": "Hearts2Hearts",
+      "publishedAt": "2026-08-13T09:00:18Z",
+      "thumbnail": "https://i.ytimg.com/vi/An0vA4ZLqkk/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=An0vA4ZLqkk",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-08-28T14:22:40.869Z"
   }
 }
