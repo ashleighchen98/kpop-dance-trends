@@ -52,8 +52,10 @@ jobs:
 
       - name: Prepare the Pages artifact
         run: |
-          mkdir -p pages-dist
-          cp output/dashboard.html pages-dist/index.html
+          mkdir -p pages-dist/dashboard
+          cp landing/index.html pages-dist/index.html
+          cp landing/success.html pages-dist/success.html
+          cp output/dashboard.html pages-dist/dashboard/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
