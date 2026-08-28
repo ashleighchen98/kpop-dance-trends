@@ -1,0 +1,19 @@
+{
+  "name": "kpop-dance-trends-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Weekly tracker for trending K-pop dance challenges — content-planning tool for dancewithashs.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "scrape:youtube": "node src/scrapers/youtube.js",
+    "process": "node src/processing/index.js",
+    "dashboard": "node src/dashboard/generate.js",
+    "weekly": "bash scripts/weekly-run.sh",
+    "serve": "node src/server.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

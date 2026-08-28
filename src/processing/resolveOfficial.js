@@ -1,0 +1,142 @@
+// Resolves each dance group's OFFICIAL choreography source — a dance
+// practice video, or failing that the official MV — via targeted searches,
+// verified against the group's own identity tokens before accepting a
+// result. A group that resolves to neither is dropped from the final top N
+// entirely, rather than shown with a guessed or wrong link: in practice
+// this also filters out content that isn't a real, identifiable K-pop
+// release (skits, memes, a non-K-pop cover that only matched the search on
+// genre words) — see resolveOne's comment for why.
+//
+// The verification step matters, not just the phrase match: caught on real
+// data, a query "girlset itzy chat dance practice" returned a real GIRLSET
+// dance-practice video that contained the phrase "dance practice" — for
+// their song "Tweak," not "Chat." YouTube's search relevance had weighted
+// the distinctive word "girlset" over the common word "chat." Checking that
+// the CANDIDATE's own title actually shares the group's identity tokens
+// (via dedupe.js's tokensAreSimilar — the same, already-tuned check used to
+// group duplicates in the first place) catches that a phrase match alone
+// doesn't.
+
+import { searchCandidatesContaining } from '../scrapers/youtube.js';
+import { extractIdentityTokens, tokensAreSimilar } from './dedupe.js';
+import { MAX_CANDIDATES_TO_RESOLVE } from '../config.js';
+import { getCachedOfficial, setCachedOfficial } from './officialCache.js';
+
+// tokensAreSimilar requires 2+ shared words, tuned for comparing whole
+// titles — a channel name is usually just the artist name, one word, so
+// that check alone would always fail here even for genuinely official
+// channels (real case: channel "ENHYPEN" only ever contributes the single
+// token "enhypen"). This just checks for any overlap at all, which is
+// enough for a channel name specifically.
+function channelLooksOfficial(groupTokens, channelTitle) {
+  const channelTokens = extractIdentityTokens(channelTitle);
+  for (const tok of groupTokens) {
+    if (channelTokens.has(tok)) return true;
+  }
+  return false;
+}
+
+async function resolveOne(group) {
+  const tokens = [...group.sharedTokens];
+  const base = tokens.join(' ');
+
+  // Reaction/commentary videos routinely put "(Official Music Video)" in
+  // their OWN title while quoting what they're reacting to — caught on
+  // real data: a search for "official mv" surfaced one such video, and
+  // checking for the word "official" alone didn't catch that it wasn't
+  // the MV itself. Excluding "reaction" titles from both paths, not just
+  // the MV one — a "dance practice reaction" is just as plausible.
+  const isNotReaction = (c) => !c.title.toLowerCase().includes('reaction');
+  const isVerified = (c) => tokensAreSimilar(group.sharedTokens, extractIdentityTokens(c.title));
+
+  // isOfficialChannel is a confidence signal, not a filter — content
+  // verification (isVerified) already confirmed the candidate is genuinely
+  // about the right song. This just tracks whether the channel itself looks
+  // like the artist's own (real cases where it correctly doesn't: KATSEYE
+  // "Hootie Frutti" dance-practice search results were dominated by fan
+  // channels "Golden Dance Initiative" and "Mikrokosmos", not KATSEYE's own
+  // channel — worth being honest about in the label rather than calling
+  // everything "official" regardless).
+  const practiceCandidates = await searchCandidatesContaining(`${base} dance practice`, 'dance practice');
+  const practiceMatch = practiceCandidates.find((c) => isNotReaction(c) && isVerified(c));
+  if (practiceMatch) {
+    return {
+      ...practiceMatch,
+      kind: 'dance practice',
+      isOfficialChannel: channelLooksOfficial(group.sharedTokens, practiceMatch.channelTitle),
+    };
+  }
+
+  const mvCandidates = await searchCandidatesContaining(`${base} official mv`, 'official');
+  const mvMatch = mvCandidates.find((c) => isNotReaction(c) && isVerified(c));
+  if (mvMatch) {
+    return {
+      ...mvMatch,
+      kind: 'official mv',
+      isOfficialChannel: channelLooksOfficial(group.sharedTokens, mvMatch.channelTitle),
+    };
+  }
+
+  return null;
+}
+
+/**
+ * Takes groups already ordered best-first. Walks down the list resolving
+ * each group's official video, stopping once `limit` have resolved or
+ * MAX_CANDIDATES_TO_RESOLVE candidates have been tried, whichever comes
+ * first — bounds API cost predictably even when many candidates fail to
+ * resolve.
+ *
+ * Checks the persistent cache (officialCache.js) before spending any API
+ * calls on a candidate — a dance seen on a previous run doesn't cost
+ * quota again. Cache hits don't count against MAX_CANDIDATES_TO_RESOLVE's
+ * API-call budget at all (only real lookups do), so a mostly-cached run can
+ * fill far more than 15 slots without touching the daily quota.
+ */
+export async function resolveTopGroups(groups, limit) {
+  const resolved = [];
+  let apiLookupsTried = 0;
+  // Once true, stop attempting NEW live lookups — but keep scanning the
+  // rest of `groups` for cache hits. A `break` here instead of a flag was
+  // a real bug caught while testing this against genuinely exhausted
+  // quota: it stopped the whole loop the moment quota ran out, which
+  // silently dropped every CACHED (free, zero-cost) dance that happened to
+  // sort after whichever uncached candidate hit the wall first — exactly
+  // the scenario this cache exists to make free.
+  let quotaExhausted = false;
+
+  for (const group of groups) {
+    if (resolved.length >= limit) break;
+    const tokens = [...group.sharedTokens];
+
+    const cached = getCachedOfficial(tokens);
+    if (cached) {
+      resolved.push({ ...group, official: cached });
+      continue;
+    }
+
+    if (quotaExhausted || apiLookupsTried >= MAX_CANDIDATES_TO_RESOLVE) continue;
+    apiLookupsTried++;
+
+    try {
+      const official = await resolveOne(group);
+      if (official) {
+        resolved.push({ ...group, official });
+        setCachedOfficial(tokens, official);
+      }
+    } catch (err) {
+      if (err.quotaExceeded) {
+        quotaExhausted = true;
+        console.warn(
+          `[resolveOfficial] YouTube's daily search quota is exhausted — no more new lookups this run, ` +
+            `but still checking remaining candidates against the cache. Resets on Google's clock ` +
+            `(Pacific time), not necessarily today in your timezone.`
+        );
+        continue;
+      }
+      console.warn(`[resolveOfficial] lookup failed for [${tokens.join(' ')}]: ${err.message}`);
+    }
+  }
+
+  return resolved;
+}

@@ -1,0 +1,12 @@
+node_modules/
+.env
+data/cache/youtube-*.json
+data/cache/ranked-*.json
+output/*.html
+logs/*.log
+.DS_Store
+
+# data/cache/official-resolved.json is NOT ignored, unlike the
+# date-stamped snapshots above — it's a persistent cache built up over
+# many days of real API quota, not a daily throwaway, and worth keeping
+# if this project ever becomes a git repo.
