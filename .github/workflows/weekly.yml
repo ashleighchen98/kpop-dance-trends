@@ -1,5 +1,3 @@
-$ cat /Users/ash/Documents/kpop-dance-trends/.github/workflows/weekly.yml
-
 name: Weekly K-pop dance trends
 
 on:
