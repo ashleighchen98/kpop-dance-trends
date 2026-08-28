@@ -121,5 +121,57 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-08-28T07:25:35.119Z"
+  },
+  "please subscribe thank you": {
+    "official": {
+      "videoId": "Xq4afhe5o3o",
+      "title": "[Official MV] Thank You for Your Love - THANK YOU (แต๊งกิ้ว)",
+      "channelTitle": "welovekamikaze",
+      "publishedAt": "2013-06-17T09:42:07Z",
+      "thumbnail": "https://i.ytimg.com/vi/Xq4afhe5o3o/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=Xq4afhe5o3o",
+      "kind": "official mv",
+      "isOfficialChannel": false
+    },
+    "resolvedAt": "2026-08-28T14:05:29.500Z"
+  },
+  "kiiikiii off pop": {
+    "official": {
+      "videoId": "hjcG58y_Fyc",
+      "title": "KiiiKiii 키키 'Pop Off Pop Off' Dance Practice",
+      "channelTitle": "KiiiKiii",
+      "publishedAt": "2026-08-26T10:00:22Z",
+      "thumbnail": "https://i.ytimg.com/vi/hjcG58y_Fyc/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=hjcG58y_Fyc",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-08-28T14:05:34.533Z"
+  },
+  "fake jk real": {
+    "official": {
+      "videoId": "rflo-Z9EdjY",
+      "title": "JK - Fake (Jordan'ai padielka) [Official Music Video]",
+      "channelTitle": "JK",
+      "publishedAt": "2022-04-01T09:00:12Z",
+      "thumbnail": "https://i.ytimg.com/vi/rflo-Z9EdjY/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=rflo-Z9EdjY",
+      "kind": "official mv",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-08-28T14:05:35.288Z"
+  },
+  "ateezofficial bad she so": {
+    "official": {
+      "videoId": "cWsvYbYGo_E",
+      "title": "She So Bad 😜 @ATEEZofficial #bad #dance",
+      "channelTitle": "Anjana Tamang",
+      "publishedAt": "2026-08-23T13:09:36Z",
+      "thumbnail": "https://i.ytimg.com/vi/cWsvYbYGo_E/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=cWsvYbYGo_E",
+      "kind": "official mv",
+      "isOfficialChannel": false
+    },
+    "resolvedAt": "2026-08-28T14:05:39.703Z"
   }
 }
