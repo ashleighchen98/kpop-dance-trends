@@ -1,0 +1,65 @@
+$ cat /Users/ash/Documents/kpop-dance-trends/.github/workflows/weekly.yml
+
+name: Weekly K-pop dance trends
+
+on:
+  schedule:
+    # 23:00 UTC Sunday ≈ 9am Monday AEST (UTC+10). AEST doesn't observe
+    # daylight saving in NSW/Sydney-aligned states, but double check this
+    # if that's not your region — adjust the hour if it drifts.
+    - cron: '0 23 * * 0'
+  workflow_dispatch: {} # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write # to commit the persistent official-video cache back
+  pages: write # to publish the dashboard
+  id-token: write # required by actions/deploy-pages
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run the pipeline (scrape -> process -> dashboard)
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          npm run scrape:youtube
+          npm run process
+          npm run dashboard
+
+      # The official-video cache is what makes quota sustainable run over
+      # run (see src/processing/officialCache.js) — it has to be committed
+      # back, or every Actions run would start from zero and re-spend
+      # quota on dances already resolved last time.
+      - name: Persist the official-video cache
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/cache/official-resolved.json
+          git diff --staged --quiet || git commit -m "Update official-video cache"
+          git push
+
+      - name: Prepare the Pages artifact
+        run: |
+          mkdir -p pages-dist
+          cp output/dashboard.html pages-dist/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages-dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
