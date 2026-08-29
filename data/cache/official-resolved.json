@@ -188,5 +188,44 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-08-29T07:06:59.464Z"
+  },
+  "cortis moneymoneymoney": {
+    "official": {
+      "videoId": "kR89kVbTE0g",
+      "title": "Cortis MONEYMONEYMONEY dance practice ||4k||FEAT. ACAI",
+      "channelTitle": "𝐂𝐎𝐑𝐓𝐈𝐒 Fame",
+      "publishedAt": "2026-08-26T15:00:06Z",
+      "thumbnail": "https://i.ytimg.com/vi/kR89kVbTE0g/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=kR89kVbTE0g",
+      "kind": "dance practice",
+      "isOfficialChannel": false
+    },
+    "resolvedAt": "2026-08-29T07:09:49.527Z"
+  },
+  "dayoung flirty jay park 다영 박재범": {
+    "official": {
+      "videoId": "pAzWWDYZpQk",
+      "title": "다영 X 박재범 DAYOUNG X JAY PARK - FLIRTY | Dance Practice",
+      "channelTitle": "ARTBEAT",
+      "publishedAt": "2026-08-24T09:00:11Z",
+      "thumbnail": "https://i.ytimg.com/vi/pAzWWDYZpQk/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=pAzWWDYZpQk",
+      "kind": "dance practice",
+      "isOfficialChannel": false
+    },
+    "resolvedAt": "2026-08-29T07:09:54.232Z"
+  },
+  "chiến dành nào sẽ team thắng": {
+    "official": {
+      "videoId": "CPNj7LAGaDA",
+      "title": "Việt Nam Vô Địch - Sẽ Chiến Thắng | Official MV",
+      "channelTitle": "NHP Entertainment",
+      "publishedAt": "2024-12-16T11:15:06Z",
+      "thumbnail": "https://i.ytimg.com/vi/CPNj7LAGaDA/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=CPNj7LAGaDA",
+      "kind": "MV",
+      "isOfficialChannel": false
+    },
+    "resolvedAt": "2026-08-29T07:09:54.994Z"
   }
 }
