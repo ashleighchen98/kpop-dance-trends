@@ -77,7 +77,13 @@ async function resolveOne(group) {
   // the official channel, so this doesn't add a second search to the
   // common case (a real official dance practice existing and being found
   // first try).
-  const mvCandidates = await searchCandidatesContaining(`${base} official mv`, 'official');
+  //
+  // No mustContainPhrase here (unlike the practice search) — requiring the
+  // literal word "official" in the title was a real bug: a genuine upload
+  // titled "KATSEYE - Animal (M/V)" doesn't contain that word, so it never
+  // even reached the channel check below. isVerified + channelLooksOfficial
+  // are the actual gate now.
+  const mvCandidates = await searchCandidatesContaining(`${base} official mv`);
   const verifiedMv = mvCandidates.filter((c) => isNotReaction(c) && isVerified(c));
   const officialMv = verifiedMv.find((c) => channelLooksOfficial(group.sharedTokens, c.channelTitle));
   if (officialMv) {

@@ -136,14 +136,24 @@ async function getVideoStats(videoIds) {
 
 /**
  * Searches YouTube for `query`, returning full candidate info (title,
- * channel, thumbnail, url) for every result whose title contains
- * `mustContainPhrase` (case-insensitive) — plural, not just the first
- * match. Search relevance can rank a wrong-song result first (a common
- * word in the query loses to a distinctive one — a real case caught while
- * testing this: "girlset itzy chat dance practice" returned a real
- * GIRLSET dance-practice video, just for a different song, "Tweak"), so
- * the caller (processing/resolveOfficial.js) verifies candidates against
- * the actual group it's resolving for rather than trusting result order.
+ * channel, thumbnail, url). If `mustContainPhrase` is given, only returns
+ * results whose title contains it (case-insensitive) — plural, not just
+ * the first match. Search relevance can rank a wrong-song result first (a
+ * common word in the query loses to a distinctive one — a real case
+ * caught while testing this: "girlset itzy chat dance practice" returned
+ * a real GIRLSET dance-practice video, just for a different song,
+ * "Tweak"), so the caller (processing/resolveOfficial.js) verifies
+ * candidates against the actual group it's resolving for rather than
+ * trusting result order.
+ *
+ * `mustContainPhrase` is deliberately optional: requiring the literal word
+ * "official" in an MV's title was a real bug — a genuine official upload
+ * titled e.g. "KATSEYE - Animal (M/V)" doesn't contain that word at all,
+ * so it got rejected by this filter before the caller ever got to check
+ * whether the channel itself was really KATSEYE's. The channel match is
+ * the reliable signal; the title phrase is only worth requiring when
+ * there's no better option (see the 'dance practice' caller, where the
+ * phrase itself is what we're looking for).
  */
 export async function searchCandidatesContaining(query, mustContainPhrase, { maxResults = 5 } = {}) {
   const apiKey = getApiKey();
@@ -176,10 +186,10 @@ export async function searchCandidatesContaining(query, mustContainPhrase, { max
   }
   const data = await res.json();
   const items = data.items || [];
-  const phrase = mustContainPhrase.toLowerCase();
+  const phrase = mustContainPhrase ? mustContainPhrase.toLowerCase() : null;
 
   return items
-    .filter((item) => decodeHtmlEntities(item.snippet.title).toLowerCase().includes(phrase))
+    .filter((item) => !phrase || decodeHtmlEntities(item.snippet.title).toLowerCase().includes(phrase))
     .map((item) => ({
       videoId: item.id.videoId,
       title: decodeHtmlEntities(item.snippet.title),
