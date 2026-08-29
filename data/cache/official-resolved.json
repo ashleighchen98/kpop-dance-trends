@@ -59,30 +59,6 @@
     },
     "resolvedAt": "2026-08-27T13:20:17.888Z"
   },
-  "eclipse francisco frutti hootie katseye san 캣츠아이": {
-    "official": {
-      "videoId": "EUnmmCGUw4E",
-      "title": "[4K] Katseye - \"Hootie Frutti\" Dance Practice [MIRROR] | Dance Cover By Golden Dance",
-      "channelTitle": "Golden Dance Initiative | Red Dance PR",
-      "thumbnail": "https://i.ytimg.com/vi/EUnmmCGUw4E/mqdefault.jpg",
-      "url": "https://www.youtube.com/watch?v=EUnmmCGUw4E",
-      "kind": "dance practice",
-      "isOfficialChannel": false
-    },
-    "resolvedAt": "2026-08-27T13:21:28.430Z"
-  },
-  "frutti hootie katseye": {
-    "official": {
-      "videoId": "EUnmmCGUw4E",
-      "title": "[4K] Katseye - \"Hootie Frutti\" Dance Practice [MIRROR] | Dance Cover By Golden Dance",
-      "channelTitle": "Golden Dance Initiative | Red Dance PR",
-      "thumbnail": "https://i.ytimg.com/vi/EUnmmCGUw4E/mqdefault.jpg",
-      "url": "https://www.youtube.com/watch?v=EUnmmCGUw4E",
-      "kind": "dance practice",
-      "isOfficialChannel": false
-    },
-    "resolvedAt": "2026-08-27T13:21:43.650Z"
-  },
   "back got hana illit jisoo momoka": {
     "official": {
       "videoId": "EL2lwHLePHc",
@@ -199,5 +175,18 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-08-29T01:07:14.357Z"
+  },
+  "frutti hootie katseye": {
+    "official": {
+      "videoId": "vi7kn4D1W_E",
+      "title": "KATSEYE - Hootie Frutti (Official Lyric Video)",
+      "channelTitle": "KATSEYE",
+      "publishedAt": "2026-08-27T16:02:15Z",
+      "thumbnail": "https://i.ytimg.com/vi/vi7kn4D1W_E/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=vi7kn4D1W_E",
+      "kind": "MV",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-08-29T07:06:59.464Z"
   }
 }

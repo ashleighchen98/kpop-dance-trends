@@ -49,36 +49,46 @@ async function resolveOne(group) {
   const isNotReaction = (c) => !c.title.toLowerCase().includes('reaction');
   const isVerified = (c) => tokensAreSimilar(group.sharedTokens, extractIdentityTokens(c.title));
 
-  // isOfficialChannel is a confidence signal, not a filter — content
-  // verification (isVerified) already confirmed the candidate is genuinely
-  // about the right song. This just tracks whether the channel itself looks
-  // like the artist's own (real cases where it correctly doesn't: KATSEYE
-  // "Hootie Frutti" dance-practice search results were dominated by fan
-  // channels "Golden Dance Initiative" and "Mikrokosmos", not KATSEYE's own
-  // channel — worth being honest about in the label rather than calling
-  // everything "official" regardless).
+  // Priority is "official channel, either kind" before "fan-made, either
+  // kind" — not "dance practice before MV" regardless of who made it. Real
+  // case that prompted this: KATSEYE "Hootie Frutti" dance-practice search
+  // results were dominated by fan channels ("Golden Dance Initiative",
+  // "Mikrokosmos"), and the old code took the first verified match
+  // immediately — a fan cover — without ever checking whether the
+  // official MV was available instead. A real official video is a better
+  // link than someone else's cover, even if it's the MV rather than
+  // choreography specifically.
   const practiceCandidates = await searchCandidatesContaining(`${base} dance practice`, 'dance practice');
-  const practiceMatch = practiceCandidates.find((c) => isNotReaction(c) && isVerified(c));
-  if (practiceMatch) {
-    return {
-      ...practiceMatch,
-      kind: 'dance practice',
-      isOfficialChannel: channelLooksOfficial(group.sharedTokens, practiceMatch.channelTitle),
-    };
+  const verifiedPractice = practiceCandidates.filter((c) => isNotReaction(c) && isVerified(c));
+  const officialPractice = verifiedPractice.find((c) => channelLooksOfficial(group.sharedTokens, c.channelTitle));
+  if (officialPractice) {
+    return { ...officialPractice, kind: 'dance practice', isOfficialChannel: true };
   }
 
+  // No official dance-practice video — try the MV before settling for a
+  // fan cover. Only reached when practice search didn't already turn up
+  // the official channel, so this doesn't add a second search to the
+  // common case (a real official dance practice existing and being found
+  // first try).
   const mvCandidates = await searchCandidatesContaining(`${base} official mv`, 'official');
-  const mvMatch = mvCandidates.find((c) => isNotReaction(c) && isVerified(c));
-  if (mvMatch) {
-    return {
-      ...mvMatch,
-      // Not 'official mv' — the dashboard template already prepends
-      // "official " itself when isOfficialChannel is true (see
-      // generate.js), so that value produced a real, shipped bug:
-      // "Watch official official mv" on a live customer-facing card.
-      kind: 'MV',
-      isOfficialChannel: channelLooksOfficial(group.sharedTokens, mvMatch.channelTitle),
-    };
+  const verifiedMv = mvCandidates.filter((c) => isNotReaction(c) && isVerified(c));
+  const officialMv = verifiedMv.find((c) => channelLooksOfficial(group.sharedTokens, c.channelTitle));
+  if (officialMv) {
+    // Not 'official mv' — the dashboard template already prepends
+    // "official " itself when isOfficialChannel is true (see
+    // generate.js), so that value produced a real, shipped bug: "Watch
+    // official official mv" on a live customer-facing card.
+    return { ...officialMv, kind: 'MV', isOfficialChannel: true };
+  }
+
+  // Neither search found the official channel — fall back to the best
+  // fan-made match we did find. Dance practice preferred over MV here
+  // since it's more useful to actually learn choreography from.
+  if (verifiedPractice.length > 0) {
+    return { ...verifiedPractice[0], kind: 'dance practice', isOfficialChannel: false };
+  }
+  if (verifiedMv.length > 0) {
+    return { ...verifiedMv[0], kind: 'MV', isOfficialChannel: false };
   }
 
   return null;
