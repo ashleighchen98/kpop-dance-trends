@@ -22,7 +22,7 @@ import path from 'node:path';
 import { CACHE_DIR, MIN_VIEW_COUNT_FOR_RANKING, TOP_N } from '../config.js';
 import { filterDanceTrends } from './filter.js';
 import { rankByVirality } from './rank.js';
-import { groupSimilarTrends } from './dedupe.js';
+import { groupSimilarTrends, isChannelNameOnlyGroup } from './dedupe.js';
 import { resolveTopGroups } from './resolveOfficial.js';
 
 function findLatestScrapeFile() {
@@ -60,7 +60,12 @@ export async function runProcessingPipeline() {
   const filtered = filterDanceTrends(rawVideos);
   const eligible = filtered.filter((v) => v.viewCount >= MIN_VIEW_COUNT_FOR_RANKING);
   const ranked = rankByVirality(eligible);
-  const groups = groupSimilarTrends(ranked); // sorted by representative peak score
+  const allGroups = groupSimilarTrends(ranked); // sorted by representative peak score
+  // Drop groups whose only "shared identity" is a creator's own channel
+  // name (a dance crew's own choreography, not a song cover) — a real
+  // case that reached a live dashboard: see isChannelNameOnlyGroup's
+  // comment in dedupe.js.
+  const groups = allGroups.filter((g) => !isChannelNameOnlyGroup(g));
 
   // Re-sort by how many distinct videos we found for each dance — that's
   // the real "how many people are doing this" signal, bounded by our own

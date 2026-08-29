@@ -106,6 +106,12 @@ export const NON_DANCE_EXCLUDE_KEYWORDS = [
   'guess the',
   'trivia',
 
+  // Live customer-facing dashboard example: "Real Jk vs fake Jk dance
+  // challenge" — a real-vs-fake impersonator comparison, not a
+  // choreography performance. Same "content format, not a dance" pattern
+  // as 'this or that' above.
+  'vs fake',
+
   // DANCE_SIGNAL_KEYWORDS checks "is this dance-FORMAT content", never
   // "is this actually K-pop" — nothing currently verifies that. Real example:
   // a Macarena video (not K-pop — a '90s Latin pop dance) hashtag-stuffed

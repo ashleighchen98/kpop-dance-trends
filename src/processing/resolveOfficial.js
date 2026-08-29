@@ -72,7 +72,11 @@ async function resolveOne(group) {
   if (mvMatch) {
     return {
       ...mvMatch,
-      kind: 'official mv',
+      // Not 'official mv' — the dashboard template already prepends
+      // "official " itself when isOfficialChannel is true (see
+      // generate.js), so that value produced a real, shipped bug:
+      // "Watch official official mv" on a live customer-facing card.
+      kind: 'MV',
       isOfficialChannel: channelLooksOfficial(group.sharedTokens, mvMatch.channelTitle),
     };
   }

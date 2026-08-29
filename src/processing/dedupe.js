@@ -48,6 +48,15 @@ const FILLER_WORDS = new Set([
   'the', 'of', 'with', 'by', 'vs', 'and', 'feat', 'ft', 'featuring', 'from',
   'shorts', 'short', 'viral', 'funny', 'game', 'games', 'level', 'her', 'his',
   'this', 'that', 'my', 'your', 'how', 'to',
+  // Generic call-to-action boilerplate — real bug caught on a live
+  // dashboard: two unrelated "BABY WARRIORS" videos got grouped as the
+  // same dance because they shared {please, subscribe, thank, you} in
+  // their titles. Their actual crew name ("baby warriors") wasn't even
+  // the cause — it was in a hashtag that gets stripped entirely, so the
+  // ONLY thing left in common was generic subscribe-begging text, which
+  // is exactly what a filler word is: present everywhere, identifies
+  // nothing about which dance a video is.
+  'please', 'subscribe', 'thank', 'thanks', 'you', 'like', 'follow', 'comment', 'share',
 ]);
 
 // Fraction of the smaller token set that must overlap. Was 0.6, lowered to
@@ -160,4 +169,30 @@ export function groupSimilarTrends(rankedVideos) {
  */
 export function dedupeSimilarTrends(rankedVideos) {
   return groupSimilarTrends(rankedVideos).map((g) => g.videos[0]);
+}
+
+// Real case that got through to a live customer-facing dashboard: "BABY
+// WARRIORS" videos (a dance-battle crew's own original choreography, not a
+// specific song cover) grouped together correctly, but their shared
+// identity tokens were just {baby, warriors} — their own channel/crew
+// name, not a song. resolveOfficial then matched that against an unrelated
+// video that happened to also say "Baby Warriors" somewhere, producing a
+// completely wrong "official" link.
+//
+// The generalizable signal: a group's identity tokens survive
+// groupSimilarTrends's intersection because they're shared across every
+// member — normally that means real content words (an artist + song name),
+// but if a group is really just several videos from the SAME self-branded
+// source, the "shared" words are just that brand repeating itself, not
+// anything describing an actual song. Checking whether every shared token
+// is also a token in the representative's own channel name catches this
+// without touching the token-overlap thresholds used for actual dedup
+// (which are already tuned and shouldn't be reused for a different job).
+export function isChannelNameOnlyGroup(group) {
+  const channelTokens = extractIdentityTokens(group.videos[0].channelTitle);
+  if (group.sharedTokens.size === 0 || channelTokens.size === 0) return false;
+  for (const tok of group.sharedTokens) {
+    if (!channelTokens.has(tok)) return false; // a token the channel name doesn't explain — real identity exists
+  }
+  return true;
 }

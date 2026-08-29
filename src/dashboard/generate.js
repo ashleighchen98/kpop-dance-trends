@@ -44,42 +44,48 @@ function daysAgo(isoDateString) {
 function renderCard(video, rank) {
   const scorePct = Math.round(video.scores.virality * 100);
   const versionWord = video.sampleVideoCount === 1 ? 'version' : 'versions';
+  const official = video.official;
 
   return `
     <article class="card">
       <div class="rank">#${rank}</div>
-      <a class="thumb-link" href="${escapeHtml(video.url)}" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="${escapeHtml(video.thumbnail || '')}" alt="" loading="lazy" />
+      <a class="thumb-link" href="${escapeHtml(official.url)}" target="_blank" rel="noopener noreferrer">
+        <img class="thumb" src="${escapeHtml(official.thumbnail || '')}" alt="" loading="lazy" />
       </a>
       <div class="card-body">
         <h2 class="title">
-          <a href="${escapeHtml(video.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(video.title)}</a>
+          <a href="${escapeHtml(official.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(official.title)}</a>
         </h2>
-        <div class="channel">${escapeHtml(video.channelTitle)} · ${daysAgo(video.publishedAt)} · trending example</div>
+        <div class="channel">
+          ${escapeHtml(official.channelTitle)}${official.isOfficialChannel ? '' : ' · fan-made, not the artist\'s own channel'}
+        </div>
 
         <div class="count-hero">
           <span class="count-value">${video.sampleVideoCount}</span>
           <span class="count-label">${versionWord} of this dance found this week</span>
         </div>
 
-        <div class="stats">
-          <div class="stat"><span class="stat-label">Top video views</span><span class="stat-value">${formatCompact(video.viewCount)}</span></div>
-          <div class="stat"><span class="stat-label">Likes</span><span class="stat-value">${formatCompact(video.likeCount)}</span></div>
-          <div class="stat"><span class="stat-label">Comments</span><span class="stat-value">${formatCompact(video.commentCount)}</span></div>
+        <div class="trending-example">
+          <div class="trending-example-label">📈 Trending example this week</div>
+          <a class="trending-example-title" href="${escapeHtml(video.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(video.title)}</a>
+          <div class="trending-example-channel">${escapeHtml(video.channelTitle)} · ${daysAgo(video.publishedAt)}</div>
+
+          <div class="stats">
+            <div class="stat"><span class="stat-label">Views</span><span class="stat-value">${formatCompact(video.viewCount)}</span></div>
+            <div class="stat"><span class="stat-label">Likes</span><span class="stat-value">${formatCompact(video.likeCount)}</span></div>
+            <div class="stat"><span class="stat-label">Comments</span><span class="stat-value">${formatCompact(video.commentCount)}</span></div>
+          </div>
+
+          <div class="score-row">
+            <span class="score-label">Virality score</span>
+            <div class="score-bar"><div class="score-fill" style="width:${scorePct}%"></div></div>
+            <span class="score-value">${scorePct}</span>
+          </div>
         </div>
 
-        <div class="score-row">
-          <span class="score-label">Top video score</span>
-          <div class="score-bar"><div class="score-fill" style="width:${scorePct}%"></div></div>
-          <span class="score-value">${scorePct}</span>
-        </div>
-
-        <a class="watch-btn" href="${escapeHtml(video.official.url)}" target="_blank" rel="noopener noreferrer">
-          ▶ Watch ${video.official.isOfficialChannel ? 'official ' : ''}${escapeHtml(video.official.kind)} ↗
+        <a class="watch-btn" href="${escapeHtml(official.url)}" target="_blank" rel="noopener noreferrer">
+          ▶ Watch ${official.isOfficialChannel ? 'official ' : ''}${escapeHtml(official.kind)} ↗
         </a>
-        <div class="official-caption">
-          ${escapeHtml(video.official.channelTitle)}${video.official.isOfficialChannel ? '' : ' (fan-made, not the artist\'s own channel)'}
-        </div>
       </div>
     </article>`;
 }
@@ -216,6 +222,16 @@ function renderDashboard({ videos, sourceScrapedAt, processedAt }) {
   }
   .count-value { font-size: 22px; font-weight: 800; color: var(--text); }
   .count-label { font-size: 12px; color: var(--text-dim); line-height: 1.3; }
+  .trending-example {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .trending-example-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .trending-example-title { display: block; font-size: 13.5px; font-weight: 600; color: var(--text); text-decoration: none; line-height: 1.35; }
+  .trending-example-title:hover { color: var(--accent); }
+  .trending-example-channel { font-size: 11.5px; color: var(--text-dim); margin: 4px 0 10px; }
   .stats { display: flex; gap: 16px; padding: 8px 0; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
   .stat { display: flex; flex-direction: column; gap: 2px; }
   .stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; }
@@ -236,7 +252,6 @@ function renderDashboard({ videos, sourceScrapedAt, processedAt }) {
     border-radius: 8px;
   }
   .watch-btn:hover { background: var(--accent-2); }
-  .official-caption { text-align: center; font-size: 11px; color: var(--text-dim); margin-top: -4px; }
   footer {
     max-width: 1100px;
     margin: 32px auto 0;
@@ -262,10 +277,11 @@ function renderDashboard({ videos, sourceScrapedAt, processedAt }) {
   <footer>
     Ranked by how many distinct videos were found doing each dance this week — a real, exact
     count, not an estimate, but bounded by this week's scrape sample, not a true site-wide total.
-    "Top video score" per card (view count + engagement rate + recency) describes that one
-    trending example, not the whole trend. The "Watch official" link is a separately-verified
-    dance practice or official MV — anything that didn't resolve to one of those wasn't included
-    at all. Source: YouTube Data API v3, public data only.
+    The thumbnail, title, and "Watch official" link are a separately-verified dance practice or
+    official MV — anything that didn't resolve to one of those wasn't included at all. The
+    "Trending example" box on each card shows one real creator video driving that ranking, with
+    its own view count, engagement, and virality score — that score describes the example, not
+    the official video above it. Source: YouTube Data API v3, public data only.
   </footer>
   <script>
     (function () {
