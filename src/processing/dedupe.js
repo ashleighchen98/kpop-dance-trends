@@ -57,6 +57,15 @@ const FILLER_WORDS = new Set([
   // is exactly what a filler word is: present everywhere, identifies
   // nothing about which dance a video is.
   'please', 'subscribe', 'thank', 'thanks', 'you', 'like', 'follow', 'comment', 'share',
+  // Same category, different language — real bug on a live dashboard: a
+  // singleton "BABY WARRIORS" video (no other member to intersect against,
+  // so every word in its title counted as "identity") coincidentally
+  // shared 3 generic Vietnamese words — team/nào/sẽ/dành/chiến/thắng,
+  // roughly "team/which/will/achieve/fight/win" — with a totally
+  // unrelated video, "Việt Nam Vô Địch - Sẽ Chiến Thắng." Same fix as the
+  // English boilerplate above: these words show up in tons of unrelated
+  // Vietnamese titles and identify nothing about which dance a video is.
+  'team', 'nào', 'sẽ', 'dành', 'chiến', 'thắng',
 ]);
 
 // Fraction of the smaller token set that must overlap. Was 0.6, lowered to

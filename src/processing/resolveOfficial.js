@@ -38,6 +38,13 @@ function channelLooksOfficial(groupTokens, channelTitle) {
 
 async function resolveOne(group) {
   const tokens = [...group.sharedTokens];
+
+  // An empty token set (every word turned out to be filler — a real case:
+  // a title that was entirely generic Vietnamese boilerplate) can never
+  // pass tokensAreSimilar against anything, so searching is a wasted quota
+  // spend on a query that's guaranteed to resolve to null anyway.
+  if (tokens.length === 0) return null;
+
   const base = tokens.join(' ');
 
   // Reaction/commentary videos routinely put "(Official Music Video)" in
