@@ -88,16 +88,15 @@ async function resolveOne(group) {
     return { ...officialMv, kind: 'MV', isOfficialChannel: true };
   }
 
-  // Neither search found the official channel — fall back to the best
-  // fan-made match we did find. Dance practice preferred over MV here
-  // since it's more useful to actually learn choreography from.
-  if (verifiedPractice.length > 0) {
-    return { ...verifiedPractice[0], kind: 'dance practice', isOfficialChannel: false };
-  }
-  if (verifiedMv.length > 0) {
-    return { ...verifiedMv[0], kind: 'MV', isOfficialChannel: false };
-  }
-
+  // Neither search found the official channel — explicit product decision:
+  // no fan-made fallback. A group only gets shown at all if a REAL
+  // official channel published an MV or dance practice for it, since
+  // that's simultaneously the "link to the artist's own choreography"
+  // requirement and a genuine K-pop/KATSEYE verification — a coincidental
+  // keyword match never produces this, and neither does an unrelated fan
+  // cover. This trades fewer results some weeks (a dance with only fan
+  // covers now gets dropped instead of shown as a fallback) for every
+  // shown result being fully verified — an explicit, deliberate trade.
   return null;
 }
 
