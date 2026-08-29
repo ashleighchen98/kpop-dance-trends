@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Why I Built a K-pop Dance Trends Tracker</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card-bg: #171a23;
+    --card-border: #262b38;
+    --text: #f1f2f6;
+    --text-dim: #9aa1b4;
+    --accent: #ff3d77;
+    --accent-2: #7c5cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 48px 20px 80px;
+  }
+  main { max-width: 640px; margin: 0 auto; }
+  .back-link {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .back-link:hover { color: var(--accent); }
+  h1 {
+    font-size: 30px;
+    line-height: 1.25;
+    margin: 0 0 28px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  article p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+    margin: 0 0 20px;
+  }
+  article ul {
+    margin: 0 0 20px;
+    padding-left: 22px;
+  }
+  article li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  article li:last-child { margin-bottom: 0; }
+  article strong { color: var(--text); }
+  article em { color: var(--text-dim); font-style: italic; }
+  article a { color: var(--accent); text-decoration: none; }
+  article a:hover { color: var(--accent-2); }
+  .intro-list {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 0 0 24px;
+  }
+  .intro-list p { margin: 0 0 14px; font-weight: 600; }
+  .intro-list ul { margin: 0; }
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--card-border);
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  footer a { color: var(--text-dim); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+  <main>
+    <a class="back-link" href="../">← Back to K-pop Dance Trends</a>
+
+    <article>
+      <h1>I'm a K-pop dance creator, so I built a tool to find which dances are actually
+        trending each week</h1>
+
+      <p>
+        I run a small K-pop dance-workout channel. Every week the same problem: figuring out
+        <em>which</em> dance to film next. Not which song is a nice song — which dance is
+        actually spreading, the one enough people are filming that it's worth jumping on while
+        it's still climbing.
+      </p>
+
+      <p>
+        For a long time my process was scrolling. Thirty, forty minutes through YouTube and
+        TikTok trying to eyeball what was catching on, half the time landing on something that
+        turned out to be one viral video rather than a real trend. A single video blowing up
+        doesn't mean the <em>dance</em> is spreading. Those are two different things, and the
+        difference is everything if you're deciding what to spend a day filming.
+      </p>
+
+      <p>
+        So I built K-pop Dance Trends. It scans public YouTube data every week and ranks dances
+        not by the view count of one video, but by how many <em>distinct creators</em> are
+        actually doing each one. That's the signal I actually wanted: not "what's popular to
+        watch," but "what are people filming right now." Each entry links straight to the
+        official choreography so I can start learning without going hunting for it.
+      </p>
+
+      <div class="intro-list">
+        <p>A few things I decided early:</p>
+        <ul>
+          <li><strong>Rank by spread, not by one big number.</strong> Distinct creators doing a
+            dance tells you it's a movement, not a fluke.</li>
+          <li><strong>Verify the choreography links.</strong> Every entry points to the real
+            official dance practice or MV, and when the best available link is a fan cover
+            instead of the artist's own channel, it says so. I'd rather be honest than tidy.</li>
+          <li><strong>No manual upkeep.</strong> It refreshes on its own each week. I open it,
+            pick a dance that's still early, and film.</li>
+        </ul>
+      </div>
+
+      <p>
+        It's built entirely on the official YouTube Data API — public data, nothing sketchy, not
+        affiliated with YouTube or any artist. I made it for myself first, and it genuinely
+        changed my week: I stopped guessing and started filming trends while they were still
+        climbing instead of catching them on the way down.
+      </p>
+
+      <p>
+        If you make K-pop dance content and you know the "what do I film this week" scroll, it's
+        a one-time $5 for lifetime access, updated weekly:
+        <a href="../">K-pop Dance Trends</a>
+      </p>
+    </article>
+
+    <footer>
+      <a href="../">← Back to K-pop Dance Trends</a>
+    </footer>
+  </main>
+</body>
+</html>
