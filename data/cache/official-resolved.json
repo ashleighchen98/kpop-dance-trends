@@ -410,5 +410,31 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-09-27T23:01:00.154Z"
+  },
+  "animal boynextdoor": {
+    "official": {
+      "videoId": "bjidrM1dUIA",
+      "title": "Choreography｜BOYNEXTDOOR (보이넥스트도어) ‘ANIMAL’ Dance Practice",
+      "channelTitle": "BOYNEXTDOOR",
+      "publishedAt": "2026-09-30T13:00:03Z",
+      "thumbnail": "https://i.ytimg.com/vi/bjidrM1dUIA/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=bjidrM1dUIA",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-05T01:19:45.881Z"
+  },
+  "adéla kidman nicole": {
+    "official": {
+      "videoId": "MsCWSA4GbX8",
+      "title": "ADÉLA - \"Nicole Kidman\" (Official Trailer)",
+      "channelTitle": "ADÉLA",
+      "publishedAt": "2026-09-03T01:29:34Z",
+      "thumbnail": "https://i.ytimg.com/vi/MsCWSA4GbX8/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=MsCWSA4GbX8",
+      "kind": "MV",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-05T01:19:47.928Z"
   }
 }
