@@ -436,5 +436,31 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-10-05T01:19:47.928Z"
+  },
+  "evan twilight": {
+    "official": {
+      "videoId": "F5cktiSS_h0",
+      "title": "EVAN (에반) 'Twilight' Dance Practice | Stag:E",
+      "channelTitle": "EVAN",
+      "publishedAt": "2026-10-06T10:59:51Z",
+      "thumbnail": "https://i.ytimg.com/vi/F5cktiSS_h0/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=F5cktiSS_h0",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-12T01:52:36.954Z"
+  },
+  "biii xlov": {
+    "official": {
+      "videoId": "6IWYQc2wsVg",
+      "title": "XLOV 엑스러브 ‘Biii:-P’ Dance Practice",
+      "channelTitle": "XLOV",
+      "publishedAt": "2025-11-17T15:00:12Z",
+      "thumbnail": "https://i.ytimg.com/vi/6IWYQc2wsVg/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=6IWYQc2wsVg",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-12T01:52:43.835Z"
   }
 }
