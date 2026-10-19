@@ -462,5 +462,57 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-10-12T01:52:43.835Z"
+  },
+  "go hard meovv": {
+    "official": {
+      "videoId": "OgsumxDAwQQ",
+      "title": "MEOVV(미야오) - ‘GO HARD’ DANCE PRACTICE VIDEO (Fix Cam ver.)",
+      "channelTitle": "MEOVV",
+      "publishedAt": "2026-10-14T09:59:59Z",
+      "thumbnail": "https://i.ytimg.com/vi/OgsumxDAwQQ/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=OgsumxDAwQQ",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-19T00:33:41.230Z"
+  },
+  "allday crash project": {
+    "official": {
+      "videoId": "ljFL31qEn6M",
+      "title": "ALLDAY PROJECT - ‘CRASH’ DANCE PRACTICE VIDEO",
+      "channelTitle": "ALLDAY PROJECT",
+      "publishedAt": "2026-10-03T09:00:01Z",
+      "thumbnail": "https://i.ytimg.com/vi/ljFL31qEn6M/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=ljFL31qEn6M",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-19T00:33:41.644Z"
+  },
+  "a2o lite neon": {
+    "official": {
+      "videoId": "D968qfUZMUE",
+      "title": "A2O LITE 'NEON' Official Video",
+      "channelTitle": "A2O WORLD",
+      "publishedAt": "2026-10-12T12:30:28Z",
+      "thumbnail": "https://i.ytimg.com/vi/D968qfUZMUE/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=D968qfUZMUE",
+      "kind": "MV",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-19T00:33:42.332Z"
+  },
+  "nct spy wish 엔시티 위시": {
+    "official": {
+      "videoId": "PsPNLkBPMVg",
+      "title": "NCT WISH 엔시티 위시 'I SPY' Dance Practice",
+      "channelTitle": "NCT WISH",
+      "publishedAt": "2026-10-15T15:00:33Z",
+      "thumbnail": "https://i.ytimg.com/vi/PsPNLkBPMVg/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=PsPNLkBPMVg",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-19T00:33:42.648Z"
   }
 }
