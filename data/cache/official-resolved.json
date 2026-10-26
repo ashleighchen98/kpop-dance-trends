@@ -514,5 +514,70 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-10-19T00:33:42.648Z"
+  },
+  "mira rumi": {
+    "official": {
+      "videoId": "3B2EC6kaku4",
+      "title": "Did Rumi help Mira?#kpop#Kpopdemonehunters#rumi#Mira",
+      "channelTitle": "Rumi’s Daily Life",
+      "publishedAt": "2026-08-31T13:52:54Z",
+      "thumbnail": "https://i.ytimg.com/vi/3B2EC6kaku4/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=3B2EC6kaku4",
+      "kind": "MV",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-26T00:46:51.137Z"
+  },
+  "adéla kidman nicole vocal": {
+    "official": {
+      "videoId": "IXA6bQsVNjs",
+      "title": "Nicole Kidman",
+      "channelTitle": "ADÉLA - Topic",
+      "publishedAt": "2026-09-03T10:03:39Z",
+      "thumbnail": "https://i.ytimg.com/vi/IXA6bQsVNjs/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=IXA6bQsVNjs",
+      "kind": "MV",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-26T00:46:52.525Z"
+  },
+  "grls tuide": {
+    "official": {
+      "videoId": "7AePvutk_Zg",
+      "title": "TUIDE (튜이드) 'GRLS' Dance Practice",
+      "channelTitle": "TUIDE",
+      "publishedAt": "2026-09-20T12:59:52Z",
+      "thumbnail": "https://i.ytimg.com/vi/7AePvutk_Zg/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=7AePvutk_Zg",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-26T00:46:52.827Z"
+  },
+  "ateez bad is plank": {
+    "official": {
+      "videoId": "dTK1EU3nUf4",
+      "title": "ATEEZ(에이티즈) - 'BAD' Dance Practice (Moving Ver.)",
+      "channelTitle": "ATEEZ",
+      "publishedAt": "2026-07-01T10:00:02Z",
+      "thumbnail": "https://i.ytimg.com/vi/dTK1EU3nUf4/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=dTK1EU3nUf4",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-26T00:46:53.120Z"
+  },
+  "bloody enhypen german music paradise": {
+    "official": {
+      "videoId": "bPjrHu60278",
+      "title": "ENHYPEN (엔하이픈) ‘Bloody Paradise’ Dance Practice",
+      "channelTitle": "ENHYPEN",
+      "publishedAt": "2026-08-24T09:00:00Z",
+      "thumbnail": "https://i.ytimg.com/vi/bPjrHu60278/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=bPjrHu60278",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-10-26T00:46:56.689Z"
   }
 }
