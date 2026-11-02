@@ -579,5 +579,83 @@
       "isOfficialChannel": true
     },
     "resolvedAt": "2026-10-26T00:46:56.689Z"
+  },
+  "demon hunters netflix": {
+    "official": {
+      "videoId": "QtCbNDLeQGo",
+      "title": "“Golden” Official Choreography | KPop Demon Hunters | Netflix",
+      "channelTitle": "Netflix",
+      "publishedAt": "2026-10-27T17:00:00Z",
+      "thumbnail": "https://i.ytimg.com/vi/QtCbNDLeQGo/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=QtCbNDLeQGo",
+      "kind": "MV",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-11-02T01:55:32.913Z"
+  },
+  "hush xlov": {
+    "official": {
+      "videoId": "hfDrBfGmzqo",
+      "title": "XLOV 엑스러브 ‘Hush’ Dance Practice",
+      "channelTitle": "XLOV",
+      "publishedAt": "2026-10-29T09:00:13Z",
+      "thumbnail": "https://i.ytimg.com/vi/hfDrBfGmzqo/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=hfDrBfGmzqo",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-11-02T01:55:33.334Z"
+  },
+  "can ive kill looks": {
+    "official": {
+      "videoId": "ObeUFZEBk48",
+      "title": "IVE 아이브 'Looks Can Kill' DANCE PRACTICE",
+      "channelTitle": "IVE",
+      "publishedAt": "2026-10-26T14:00:22Z",
+      "thumbnail": "https://i.ytimg.com/vi/ObeUFZEBk48/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=ObeUFZEBk48",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-11-02T01:55:34.505Z"
+  },
+  "japan kpopガールズ netflix ダンス映像 デーモン ハンターズ ハントリックス": {
+    "official": {
+      "videoId": "XDSaj-KpCm4",
+      "title": "ハントリックス「How It’s Done」ダンス映像 Dance Practice | KPOPガールズ! デーモン・ハンターズ | Netflix Japan",
+      "channelTitle": "Netflix Japan",
+      "publishedAt": "2026-10-26T22:00:00Z",
+      "thumbnail": "https://i.ytimg.com/vi/XDSaj-KpCm4/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=XDSaj-KpCm4",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-11-02T01:55:34.791Z"
+  },
+  "lngshot masterpiece": {
+    "official": {
+      "videoId": "Tozorkpn5bc",
+      "title": "LNGSHOT - ‘Masterpiece’ Dance Practice Video",
+      "channelTitle": "LNGSHOT",
+      "publishedAt": "2026-10-27T09:00:04Z",
+      "thumbnail": "https://i.ytimg.com/vi/Tozorkpn5bc/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=Tozorkpn5bc",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-11-02T01:55:35.681Z"
+  },
+  "illit push tack tick up": {
+    "official": {
+      "videoId": "HdmcYh1r7Q4",
+      "title": "ILLIT (아일릿) ‘Tick-Tack’ Dance Practice",
+      "channelTitle": "ILLIT",
+      "publishedAt": "2024-11-15T11:00:02Z",
+      "thumbnail": "https://i.ytimg.com/vi/HdmcYh1r7Q4/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=HdmcYh1r7Q4",
+      "kind": "dance practice",
+      "isOfficialChannel": true
+    },
+    "resolvedAt": "2026-11-02T01:55:36.812Z"
   }
 }
